@@ -14,7 +14,7 @@ npm install
 ```bash
 cp .env.example .env
 ```
-* kemudian isikan configurasi pada file `.env` silahkan disesuaikan sendiri
+* Buat database terlebih dahulu pada Mysql, kemudian isikan configurasi pada file `.env`. silahkan disesuaikan dengan nama database yang anda buat tadi
 ```
 APP_NAME = Vocasia Backend Framework
 APP_PORT = 3000
@@ -24,10 +24,11 @@ NODE_ENV=development
 # database
 DB_HOST=127.0.0.1
 DB_DRIVER=mysql
-DB_NAME=vocasia
+DB_NAME=library_api
 DB_USER=root
 DB_PASS=root
 DB_PORT=3306
+PRIVATE_KEY=saOnGqNIfg  //bisa ditukar dengan string random lainnya
 
 ```
 * Kemudian jalankan script dibawah ini untuk melakukan migration ke database : 
@@ -51,6 +52,8 @@ http://localhost:3000/
 * Sequelize
 * Nodemon
 * mysql2
+* bcrypt
+* JsonWebToken
 # Group Members
 * Muhammad Syahrul Romadhon
 * Muhammad Daffa Yuza
