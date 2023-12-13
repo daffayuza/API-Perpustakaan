@@ -47,6 +47,9 @@ npm run start
 ```
 http://localhost:3000/
 ```
+### Berikut ini untuk link API Dokumentasinya :
+https://documenter.getpostman.com/view/29164346/2s9YkjCPvZ
+
 # Resources 
 * ExpressJs
 * Sequelize
