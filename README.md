@@ -1,7 +1,7 @@
 # Final Project API Perpustakaan
 
 ## Overview
-Proyek API Perpustakaan dirancang untuk memberikan solusi efisien dalam manajemen dan akses data perpustakaan. Tujuan utama proyek ini adalah menciptakan antarmuka pemrograman aplikasi (API) yang dapat digunakan untuk mengelola informasi perpustakaan, termasuk data buku, peminjaman, dan informasi anggota.
+API Perpustakaan dirancang untuk memberikan solusi efisien dalam manajemen dan akses data perpustakaan. Tujuan utama proyek ini adalah menciptakan antarmuka pemrograman aplikasi (API) yang dapat digunakan untuk mengelola informasi perpustakaan, termasuk data buku, peminjaman, dan informasi anggota.
 
 ### How To Use ?
 * jalankan perintah berikut 
