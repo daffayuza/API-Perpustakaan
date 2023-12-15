@@ -14,7 +14,7 @@ npm install
 ```bash
 cp .env.example .env
 ```
-* Buat database terlebih dahulu pada Mysql, kemudian isikan configurasi pada file `.env`. silahkan disesuaikan dengan nama database yang anda buat tadi
+* Buat database terlebih dahulu pada Mysql, kemudian isikan configurasi pada file `.env`, lalu sesuaikan isinya dengan database yang telah dibuat tadi.
 ```
 APP_NAME = Vocasia Backend Framework
 APP_PORT = 3000
@@ -47,6 +47,12 @@ npm run start
 ```
 http://localhost:3000/
 ```
+jika berhasil, maka akan muncul seperti berikut : 
+```json
+{
+    "message" : "Hello exampleController"
+}
+```
 ### Berikut ini untuk link API Dokumentasinya :
 https://documenter.getpostman.com/view/29164346/2s9YkjCPvZ
 
@@ -56,7 +62,7 @@ https://documenter.getpostman.com/view/29164346/2s9YkjCPvZ
 * Nodemon
 * mysql2
 * bcrypt
-* JsonWebToken
+* JSON Web Token (JWT)
 # Group Members
 * Muhammad Syahrul Romadhon
 * Muhammad Daffa Yuza
