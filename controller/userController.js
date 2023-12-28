@@ -87,13 +87,7 @@ userController.register = async (req, res) => {
     const saltRounds = 10;
     const generateSalt = await bcrypt.genSalt(saltRounds);
     const hashPassword = await bcrypt.hash(password, generateSalt);
-    const createUser = await User.create({
-        username: username,
-        email: email,
-        password: hashPassword,
-        role: role,
-        passwordSalt: generateSalt
-    })
+    
     if (typeof email !== 'string' || email.trim() === '' || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email)) {
         return res.status(400).json({ error: 'Email harus valid dan wajib diisi' });
     }
@@ -102,9 +96,25 @@ userController.register = async (req, res) => {
             error: 'Semua field harus diisi',
         });
     }
-    return res.status(201).json({
-        message: 'User Berhasil dibuat !'
-    })
+
+    try {
+        const createUser = await User.create({
+            username: username,
+            email: email,
+            password: hashPassword,
+            role: role,
+            passwordSalt: generateSalt
+        })
+        return res.status(201).json({
+            message: 'User Berhasil dibuat !'
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        })
+    }
 }
 
 userController.logout = async (req, res) => {
