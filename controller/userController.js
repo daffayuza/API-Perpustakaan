@@ -20,9 +20,9 @@ const isTokenBlacklisted = async (token) => {
     this is auto generate example, you can continue 
 
 */
-userController.index = async(req,res) => {
+userController.index = async (req, res) => {
     res.json({
-        message : "Hello userController"
+        message: "Hello userController"
     })
 }
 
@@ -65,14 +65,14 @@ userController.login = async (req, res) => {
 
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {
-            return res.status(401).json({
+            return res.status(200).json({
                 data: {
                     message: "Gagal Login !",
                     token: error.message
                 }
             })
         } else {
-            return res.status(401).json({
+            return res.status(200).json({
                 data: {
                     message: "Gagal Login !",
                     token: error.message
@@ -82,19 +82,19 @@ userController.login = async (req, res) => {
     }
 }
 
-userController.register = async (req, res) => {
-    const { username, email, password, role } = req.body
+userController.registerUser = async (req, res) => {
+    const { username, email, password, role } = req.body;
     const saltRounds = 10;
     const generateSalt = await bcrypt.genSalt(saltRounds);
     const hashPassword = await bcrypt.hash(password, generateSalt);
-    
+
     if (typeof email !== 'string' || email.trim() === '' || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email)) {
         return res.status(400).json({ error: 'Email harus valid dan wajib diisi' });
     }
-    if (!username || !password || !role) {
+    if (!username || !password) {
         return res.status(400).json({
             error: 'Semua field harus diisi',
-        });
+        })
     }
 
     try {
@@ -102,11 +102,48 @@ userController.register = async (req, res) => {
             username: username,
             email: email,
             password: hashPassword,
-            role: role,
+            role: "user",
             passwordSalt: generateSalt
         })
+
         return res.status(201).json({
             message: 'User Berhasil dibuat !'
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        })
+    }
+}
+
+userController.registerAdmin = async (req, res) => {
+    const { username, email, password, role } = req.body;
+    const saltRounds = 10;
+    const generateSalt = await bcrypt.genSalt(saltRounds);
+    const hashPassword = await bcrypt.hash(password, generateSalt);
+
+    if (typeof email !== 'string' || email.trim() === '' || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email)) {
+        return res.status(400).json({ error: 'Email harus valid dan wajib diisi' });
+    }
+    if (!username || !password) {
+        return res.status(400).json({
+            error: 'Semua field harus diisi',
+        })
+    }
+
+    try {
+        const createAdmin = await User.create({
+            username: username,
+            email: email,
+            password: hashPassword,
+            role: "admin",
+            passwordSalt: generateSalt
+        })
+
+        return res.status(201).json({
+            message: 'Admin Berhasil dibuat !'
         })
     } catch (error) {
         console.log(error);
@@ -152,4 +189,3 @@ userController.logout = async (req, res) => {
 }
 
 module.exports = userController
-
